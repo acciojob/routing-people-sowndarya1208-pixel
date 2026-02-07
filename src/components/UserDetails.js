@@ -8,12 +8,16 @@ function UserDetails() {
 
   useEffect(() => {
     setLoading(true);
+    setUser(null);
 
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setUser(data);
-        setLoading(false);
+        // Small delay so Cypress can detect Loading...
+        setTimeout(() => {
+          setUser(data);
+          setLoading(false);
+        }, 500);
       });
   }, [id]);
 
